@@ -2,10 +2,12 @@
   <section>
       <h3>{{name}}</h3>
   <div>
-    <task
-    :listId="listId"></task>
+    <task v-for="(task, index) in tasks"
+    :key="index"
+    :id="task.id"
+    :name="task.name"></task>
   </div>
-    <input class='add' type="text" placeholder="Añade una tarea" @keypress.enter="add">
+    <input class='add' type="text" placeholder="Añade una tarea" :v-model="taskName" @keypress.enter="add">
   </section>
 </template>
 
@@ -15,20 +17,31 @@ export default{
   name: 'List',
   components: {Task},
   props: {
-    listId: Number,
     name: String
   },
   data () {
-    //  const id = parseInt(this.$$attrs)
+    const id = parseInt(this.$attrs)
     return {
+      taskName: '',
+      tasks: JSON.parse(localStorage.getItem('user')).tableros[this.$route.params.id].lists[id]
     }
   },
   methods: {
     add () {
-      console.log(this.$attrs)
+      const user = JSON.parse(localStorage.getItem('user'))
+      const id = this.$attrs
+      const task = {
+        id: user.tableros[this.$route.params.id].lists[id].length,
+        name: this.taskName,
+        startDate: '',
+        duration: '',
+        endDate: ''
+      }
+      user.tableros[this.$route.params.id].lists[id].push(task)
+      localStorage.setItem('user', JSON.stringify(user))
+      this.$router.go(0)
     }
   }
-
 }
 </script>
 

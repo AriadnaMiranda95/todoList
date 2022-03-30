@@ -1,7 +1,6 @@
 <template>
 <div class="">
   <h1>...</h1>
-  <input class='add' type="text" placeholder="Añade una tarea" v-model="title" @keypress.enter="add">
 </div>
 </template>
 
@@ -19,9 +18,6 @@ export default {
     }
   },
   methods: {
-    add () {
-      console.log(this.listId)
-    }
   }
 }
 </script>
