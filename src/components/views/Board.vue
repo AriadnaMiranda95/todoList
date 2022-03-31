@@ -54,15 +54,16 @@ export default {
 
 <style scoped>
   .list-collection{
-    margin: 1em 0;
+    margin: 1em 0 .5em 2em;
     display: flex;
     flex-flow: row wrap;
     justify-content: flex-start;
     align-items: baseline;
-    padding: 1em;
-
   }
 
+  .list{
+    margin: .5em .8em;
+  }
   section{
     text-align: left;
   }

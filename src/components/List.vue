@@ -21,12 +21,13 @@ export default{
   name: 'List',
   components: {Task},
   props: {
-    name: String
+    name: String,
+    id: Number
   },
   data () {
     const user = JSON.parse(localStorage.getItem('user'))
     const idTablero = this.$route.params.id
-    const idList = this.$attrs.id
+    const idList = this.id
     return {
       taskName: '',
       tasks: user.tableros[idTablero].lists[idList].tasks
@@ -36,20 +37,21 @@ export default{
     add () {
       const user = JSON.parse(localStorage.getItem('user'))
       const idTablero = this.$route.params.id
-      const idList = this.$attrs.id
+      const idList = this.id
       const idTask = user.tableros[idTablero].lists[idList].tasks.length
-      const actualDate = Date.now()
+      const actualDate = Date.now('yyyy-mm-dd')
       const task = {
         id: idTask,
         name: this.taskName,
         startDate: actualDate,
         duration: '',
-        endDate: ''
+        endDate: '',
+        completed: false
       }
       console.log(task)
       user.tableros[idTablero].lists[idList].tasks.push(task)
       localStorage.setItem('user', JSON.stringify(user))
-      this.$router.go(0)
+      //  this.$router.go(0)
     }
   }
 }
@@ -57,8 +59,7 @@ export default{
 <style scoped>
   section {
     background-color: rgb(237, 224, 243);
-    margin: .5em;
-    width: 300px !important;
+    width: 320px !important;
     border-radius: .2em;
     text-align: initial;
     padding: .5em;

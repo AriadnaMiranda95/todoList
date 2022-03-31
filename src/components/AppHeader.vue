@@ -36,7 +36,7 @@ header {
 }
 
 .title:hover{
-  color: #de72e4;
+  color: #cf85d3;
 }
 
 </style>
