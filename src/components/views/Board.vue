@@ -1,8 +1,8 @@
 <template lang='html'>
   <section class='container'>
-    <h3><span>Mis Paneles</span> ➭ {{name}}</h3>
+    <h3><span>Mis Paneles</span> ➭ {{ boardName }}</h3>
        <input type="text"
-        placeholder="Añadir lista"
+        placeholder="Añadir nueva lista"
         v-model="listName"
         @keyup.enter="add()">
     <div class="list-collection">
@@ -31,7 +31,7 @@ export default {
     return {
       listName: '',
       lists: JSON.parse(localStorage.getItem('user')).tableros[id].lists,
-      boardName: JSON.parse(localStorage.getItem('user')).tableros
+      boardName: JSON.parse(localStorage.getItem('user')).tableros[id]['name']
 
     }
   },
@@ -89,6 +89,12 @@ export default {
     outline: 0;
     transition: all 600ms ease;
   }
+
+  input::placeholder{
+    text-align: initial;
+    padding: 0 .5em;
+  }
+
   .list:hover{
     background-color: #b979cc;
     color: white;
