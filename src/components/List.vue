@@ -2,12 +2,15 @@
   <section>
       <h3>{{name}}</h3>
   <div>
+    <input type="text"
+        placeholder="Añadir lista"
+        v-model="taskName"
+        @keyup.enter="add()">
     <task v-for="(task, index) in tasks"
     :key="index"
     :id="task.id"
     :name="task.name"></task>
   </div>
-    <input class='add' type="text" placeholder="Añade una tarea" :v-model="taskName" @keypress.enter="add">
   </section>
 </template>
 
@@ -20,31 +23,36 @@ export default{
     name: String
   },
   data () {
-    const id = parseInt(this.$attrs)
+    const user = JSON.parse(localStorage.getItem('user'))
+    const idTablero = this.$route.params.id
+    const idList = this.$attrs.id
     return {
       taskName: '',
-      tasks: JSON.parse(localStorage.getItem('user')).tableros[this.$route.params.id].lists[id]
+      tasks: user.tableros[idTablero].lists[idList].tasks
     }
   },
   methods: {
     add () {
       const user = JSON.parse(localStorage.getItem('user'))
-      const id = this.$attrs
+      const idTablero = this.$route.params.id
+      const idList = this.$attrs.id
+      const idTask = user.tableros[idTablero].lists[idList].tasks.length
+      const actualDate = Date.now()
       const task = {
-        id: user.tableros[this.$route.params.id].lists[id].length,
+        id: idTask,
         name: this.taskName,
-        startDate: '',
+        startDate: actualDate,
         duration: '',
         endDate: ''
       }
-      user.tableros[this.$route.params.id].lists[id].push(task)
+      console.log(task)
+      user.tableros[idTablero].lists[idList].tasks.push(task)
       localStorage.setItem('user', JSON.stringify(user))
-      this.$router.go(0)
+      //  this.$router.go(0)
     }
   }
 }
 </script>
-
 <style scoped>
   section {
     background-color: rgb(237, 224, 243);
