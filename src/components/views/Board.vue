@@ -57,8 +57,9 @@ export default {
     margin: 1em 0;
     display: flex;
     flex-flow: row wrap;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: baseline;
+    padding: 1em;
 
   }
 
@@ -74,7 +75,7 @@ export default {
 
   input{
     background-color: #b68ac4;
-    width: 110px !important;
+    width: 200px !important;
     height: 50px;
     border: 0;
     border-radius: 3px;
@@ -88,8 +89,9 @@ export default {
     outline: 0;
     transition: all 600ms ease;
   }
-  .list:active{
+  .list:hover{
     background-color: #b979cc;
+    color: white;
   }
 
   input:active, input:focus{

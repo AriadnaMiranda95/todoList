@@ -3,13 +3,14 @@
       <h3>{{name}}</h3>
   <div>
     <input type="text"
-        placeholder="Añadir lista"
+        placeholder="Añadir una tarea a la lista"
         v-model="taskName"
         @keyup.enter="add()">
     <task v-for="(task, index) in tasks"
     :key="index"
     :id="task.id"
-    :name="task.name"></task>
+    :name="task.name"
+    class="task"></task>
   </div>
   </section>
 </template>
@@ -48,7 +49,7 @@ export default{
       console.log(task)
       user.tableros[idTablero].lists[idList].tasks.push(task)
       localStorage.setItem('user', JSON.stringify(user))
-      //  this.$router.go(0)
+      this.$router.go(0)
     }
   }
 }
@@ -64,6 +65,27 @@ export default{
      box-shadow: 0 0 0 0.5px rgba(49,49,93,.03),
       0 2px 5px 0 rgba(49,49,93,.1),
       0 1px 2px 0 rgba(0,0,0,.08);
+  }
+    input{
+      width: 99%;
+      border: white;
+      border-radius: .2em;
+      padding: .5em 0;
+      margin: .2em 0;
+    }
+
+    input::placeholder{
+      color: gray;
+      padding: 0 .4em;
+    }
+
+  .task {
+    background-color: white;
+    width: 100% !important;
+    border-color: white;
+    border-radius: .4em;
+    padding: .5em 0;
+    margin: .2em 0;
   }
 
   @media screen and (min-width: 400px) {

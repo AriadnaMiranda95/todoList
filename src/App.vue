@@ -1,13 +1,15 @@
 <template>
   <div id="app">
-    <app-header></app-header>
-    <div v-if='mostrar'>
-      <modal></modal>
-    </div>
-    <div v-else>
-      <router-view class="container"></router-view>
-    </div>
-    <app-footer></app-footer>
+    <app-header class="header"></app-header>
+    <main>
+      <div v-if='mostrar'>
+        <modal></modal>
+      </div>
+      <div v-else>
+        <router-view class="container"></router-view>
+      </div>
+    </main>
+    <app-footer class="footer"></app-footer>
   </div>
 </template>
 
@@ -41,7 +43,21 @@ export default {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.header{
+  flex: 1 1 10vh;
+  max-height: 10vh;
+}
+.footer{
+  flex: 1 1 10vh;
+  max-height: 10vh;
+}
+
+main{
+  flex: 3 1 80vh;
 }
 </style>
