@@ -22,15 +22,19 @@ export default{
   components: {Task},
   props: {
     name: String,
-    id: Number
+    id: Number,
+    show: Boolean
   },
   data () {
     const user = JSON.parse(localStorage.getItem('user'))
     const idTablero = this.$route.params.id
     const idList = this.id
+    const tasks = (user.tableros[idTablero].lists[idList].tasks).filter(function (task) {
+      return task.show
+    })
     return {
       taskName: '',
-      tasks: user.tableros[idTablero].lists[idList].tasks
+      tasks: tasks// user.tableros[idTablero].lists[idList].tasks
     }
   },
   methods: {
@@ -46,12 +50,13 @@ export default{
         startDate: actualDate,
         duration: '',
         endDate: '',
-        completed: false
+        completed: false,
+        show: true
       }
       console.log(task)
       user.tableros[idTablero].lists[idList].tasks.push(task)
       localStorage.setItem('user', JSON.stringify(user))
-      //  this.$router.go(0)
+      this.$router.go(0)
     }
   }
 }
@@ -82,11 +87,13 @@ export default{
 
   .task {
     background-color: white;
-    width: 100% !important;
+    width: 93% !important;
     border-color: white;
     border-radius: .4em;
-    padding: .5em 0;
+    padding: .5em 0 .5em .5em;
     margin: .2em 0;
+    color: black;
+
   }
 
   @media screen and (min-width: 400px) {

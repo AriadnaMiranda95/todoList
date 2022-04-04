@@ -1,6 +1,6 @@
 <template lang='html'>
   <section class='container'>
-    <h3><span>Mis Paneles</span> ➭ {{ boardName }}</h3>
+    <h3><span>Mis Paneles</span> ➭ <span class='boardName'>{{ boardName }}</span> </h3>
        <input type="text"
         placeholder="Añadir nueva lista"
         v-model="listName"
@@ -19,7 +19,6 @@
 
 <script>
 import List from '@/components/List'
-
 export default {
   name: 'board-view',
   components: {List},
@@ -72,6 +71,7 @@ export default {
     color: #37474f;
     text-align: left;
     margin: 1.5rem;
+    font-size: 25px;
   }
 
   input{
@@ -93,12 +93,17 @@ export default {
 
   input::placeholder{
     text-align: initial;
+    font-size: 18px;
     padding: 0 .5em;
   }
 
   .list:hover{
-    background-color: #b979cc;
+    background-color: #b680c7;
     color: white;
+  }
+
+  .boardName{
+    color: #f9617d;
   }
 
   input:active, input:focus{
