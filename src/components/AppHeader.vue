@@ -26,9 +26,9 @@ header {
 
 .title {
   align-self: center;
-  color: #ffffff;
+  color: #f9617d;
   text-decoration: none;
-  font-size: 2rem;
+  font-size: 2.5em;
   font-weight: bold;
   margin-right: 1rem;
   font-family: 'Oswald', sans-serif;

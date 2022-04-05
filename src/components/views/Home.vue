@@ -52,6 +52,9 @@ export default{
   h3{
     text-align: left;
     margin: 1.5rem;
+    font-size: 1.8em;
+    font-family: 'Oswald', sans-serif;
+    font-family: 'Yanone Kaffeesatz', sans-serif;
   }
 
   .boards-collection{
@@ -81,5 +84,10 @@ export default{
 
   input::placeholder{
     color: white;
+  }
+
+  board-card{
+  display: flex;
+  justify-content: space-between;
   }
 </style>

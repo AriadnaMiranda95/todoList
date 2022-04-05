@@ -41,6 +41,7 @@ export default {
       const list = {
         id: user.tableros[id].lists.length,
         name: this.listName,
+        show: true,
         tasks: []
       }
       user.tableros[id].lists.push(list)
@@ -98,7 +99,7 @@ export default {
   }
 
   .list:hover{
-    background-color: #b680c7;
+    background-color: #bb91c8;
     color: white;
   }
 

@@ -1,9 +1,8 @@
 <template>
-
-<div class="task ejemplo" >
- <p @click="changeState()" v-bind:class="isActive" >{{ name }} </p>
- <button class="delete" @click="deleteTask()">🗑️</button>
- </div>
+  <div class="task ejemplo" >
+    <p @click="changeState()" v-bind:class="isActive" >{{ name }} </p>
+    <button class="delete" @click="deleteTask()"><i class="fa-solid fa-trash-can"></i></button>
+  </div>
 </template>
 
 <script>
@@ -79,7 +78,17 @@ export default {
 
   .delete:hover{
     font-size: 1.8em;
-    transition: all .2s ease;cursor: pointer;
+    transition: all .25s ease;cursor: pointer;
+  }
+
+  .fa-solid{
+    color: #f9617d;
+    padding: .2em;
+  }
+
+  .fa-solid:hover{
+    color: #f04262;
+
   }
 
 </style>

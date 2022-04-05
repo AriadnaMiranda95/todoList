@@ -3,6 +3,7 @@
   class="board-card"
   :to="{name: 'board', params: {name, id}}">
   <span class="board-card-title">{{name}}</span>
+  <button class="delete-b"><i class="fa-solid fa-trash-can"></i></button>
   </router-link>
 </template>
 
@@ -35,6 +36,10 @@ export default {
     width: 90%;
     height: 90px;
   }
+  .delete-b{
+    background-color: transparent;
+    border: none;
+  }
 
   .board-card:hover{
     background-color: #b68ac4;
@@ -42,10 +47,9 @@ export default {
     font-weight: bold;
   }
   .board-card-title{
-    font-size: 25px;
+    font-size: 30px;
     font-family: 'Oswald', sans-serif;
     font-family: 'Yanone Kaffeesatz', sans-serif;
-
   }
 
   @media screen and (min-width: 600px) {

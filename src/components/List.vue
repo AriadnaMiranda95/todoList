@@ -80,6 +80,12 @@ export default{
       margin: .2em 0;
     }
 
+    h3{
+      font-size: 1.6em;
+      font-family: 'Oswald', sans-serif;
+      font-family: 'Yanone Kaffeesatz', sans-serif;
+    }
+
     input::placeholder{
       color: gray;
       padding: 0 .4em;
