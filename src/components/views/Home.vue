@@ -8,6 +8,7 @@
        :name="board.name"
        :id="board.id">
        </board-card>
+
     </div>
   </div>
 </template>
@@ -53,8 +54,7 @@ export default{
     text-align: left;
     margin: 1.5rem;
     font-size: 1.8em;
-    font-family: 'Oswald', sans-serif;
-    font-family: 'Yanone Kaffeesatz', sans-serif;
+
   }
 
   .boards-collection{

@@ -1,17 +1,20 @@
 <template>
   <section>
-      <h3>{{name}}</h3>
-  <div>
-    <input type="text"
-        placeholder="Añadir una tarea a la lista"
-        v-model="taskName"
-        @keyup.enter="add()">
-    <task v-for="(task, index) in tasks"
-    :key="index"
-    :id="task.id"
-    :name="task.name"
-    class="task"></task>
-  </div>
+    <div class="close">
+      <button class="deleteList" @click="deleteList()"> X </button>
+    </div>
+        <p>{{name}}</p>
+    <div>
+      <input type="text"
+          placeholder="Añadir una tarea a la lista"
+          v-model="taskName"
+          @keyup.enter="add()">
+      <task v-for="(task, index) in tasks"
+      :key="index"
+      :id="task.id"
+      :name="task.name"
+      class="task"></task>
+    </div>
   </section>
 </template>
 
@@ -23,9 +26,11 @@ export default{
   props: {
     name: String,
     id: Number,
-    show: Boolean
+    show: Boolean,
+    actualDate: Date
   },
   data () {
+    const moment = require('moment')
     const user = JSON.parse(localStorage.getItem('user'))
     const idTablero = this.$route.params.id
     const idList = this.id
@@ -34,16 +39,18 @@ export default{
     })
     return {
       taskName: '',
-      tasks: tasks// user.tableros[idTablero].lists[idList].tasks
+      tasks: tasks,
+      user,
+      idTablero,
+      idList,
+      moment
     }
   },
   methods: {
     add () {
-      const user = JSON.parse(localStorage.getItem('user'))
-      const idTablero = this.$route.params.id
-      const idList = this.id
-      const idTask = user.tableros[idTablero].lists[idList].tasks.length
-      const actualDate = Date.now('yyyy-mm-dd')
+      const idTask = this.user.tableros[this.idTablero].lists[this.idList].tasks.length
+      const actualDate = this.moment(new Date()).local().format('DD/MM/YYYY h:mm a')
+
       const task = {
         id: idTask,
         name: this.taskName,
@@ -54,9 +61,13 @@ export default{
         show: true
       }
       console.log(task)
-      user.tableros[idTablero].lists[idList].tasks.push(task)
-      localStorage.setItem('user', JSON.stringify(user))
+      this.user.tableros[this.idTablero].lists[this.idList].tasks.push(task)
+      localStorage.setItem('user', JSON.stringify(this.user))
+      console.log(this.actualDate)
       this.$router.go(0)
+    },
+    deleteList () {
+      this.show = false
     }
   }
 }
@@ -80,10 +91,9 @@ export default{
       margin: .2em 0;
     }
 
-    h3{
+    p{
       font-size: 1.6em;
-      font-family: 'Oswald', sans-serif;
-      font-family: 'Yanone Kaffeesatz', sans-serif;
+      margin: .5em;
     }
 
     input::placeholder{
@@ -91,11 +101,27 @@ export default{
       padding: 0 .4em;
     }
 
+  .close{
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .deleteList{
+    background-color: transparent;
+    border: none;
+  }
+
+  .deleteList:hover{
+    color: white;
+    transition: all .25s ease;
+    cursor: pointer;
+  }
+
   .task {
     background-color: white;
-    width: 93% !important;
+    width: 94% !important;
     border-color: white;
-    border-radius: .4em;
+    border-radius: .2em;
     padding: .5em 0 .5em .5em;
     margin: .2em 0;
     color: black;
