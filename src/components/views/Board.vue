@@ -26,26 +26,29 @@ export default {
     name: String
   },
   data () {
+    const user = JSON.parse(localStorage.getItem('user'))
     const id = parseInt(this.$route.params.id)
+    const listToDelete = (user.tableros[id].lists).filter(function (list) {
+      return list.show
+    })
     return {
       listName: '',
-      lists: JSON.parse(localStorage.getItem('user')).tableros[id].lists,
-      boardName: JSON.parse(localStorage.getItem('user')).tableros[id]['name']
-
+      lists: listToDelete,
+      boardName: JSON.parse(localStorage.getItem('user')).tableros[id]['name'],
+      user
     }
   },
   methods: {
     add () {
-      const user = JSON.parse(localStorage.getItem('user'))
       const id = this.$route.params.id
       const list = {
-        id: user.tableros[id].lists.length,
+        id: this.user.tableros[id].lists.length,
         name: this.listName,
         show: true,
         tasks: []
       }
-      user.tableros[id].lists.push(list)
-      localStorage.setItem('user', JSON.stringify(user))
+      this.user.tableros[id].lists.push(list)
+      localStorage.setItem('user', JSON.stringify(this.user))
       this.$router.go(0)
     }
   }

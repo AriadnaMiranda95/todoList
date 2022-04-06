@@ -14,6 +14,10 @@
 <script>
 export default {
   name: 'modal',
+  props: {
+    id: Number,
+    name: String
+  },
   methods: {
     crearUsuario () {
       const userName = document.querySelector('.name')
@@ -54,6 +58,7 @@ export default {
     color: rgb(88, 92, 92);
     width: 98%;
     border-radius: .1em;
+    text-align: center;
   }
 
   p{

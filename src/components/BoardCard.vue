@@ -1,10 +1,11 @@
 <template>
-  <router-link
-  class="board-card"
-  :to="{name: 'board', params: {name, id}}">
-  <span class="board-card-title">{{name}}</span>
-  <button class="delete-b"><i class="fa-solid fa-trash-can"></i></button>
-  </router-link>
+  <div class="board-card">
+    <button class="deleteBoard" @click="deleteBoard()"> X </button>
+    <router-link class="board-redirect"
+    :to="{name: 'board', params: {name, id}}">
+    <span class="board-card-title">{{name}}</span>
+    </router-link>
+  </div>
 </template>
 
 <script>
@@ -14,6 +15,24 @@ export default {
   props: {
     id: Number,
     name: String
+  },
+  data () {
+    const idBoard = this.id
+    const user = JSON.parse(localStorage.getItem('user'))
+    return {
+      idBoard,
+      show: true,
+      user
+    }
+  },
+  methods: {
+    deleteBoard () {
+      console.log(this.show)
+      this.show = !this.show
+      this.user.tableros[this.id]['show'] = this.show
+      localStorage.setItem('user', JSON.stringify(this.user))
+      this.$router.go(0)
+    }
   }
 }
 </script>
@@ -21,7 +40,7 @@ export default {
 <style scoped>
 
   .board-card {
-    background-color: rgb(40, 214, 182);
+    /* background-color: rgb(40, 214, 182);
     box-shadow: 0 0 0 0.5px rgba(49,49,93,.03),
     0 2px 5px 0 rgba(49,49,93,.1),
     0 1px 2px 0 rgba(0,0,0,.08);
@@ -33,26 +52,48 @@ export default {
     text-align: left;
     text-decoration: none;
     transition: all 600ms ease;
-    width: 90%;
-    height: 90px;
+    height: 90px; */
+    background-color: rgb(40, 214, 182);
+    transition: all .5s ease;
+    margin: 1em 0 0 2.6em;
+    border-radius: 5px;
+    width:20%;
+    display: flex;
+    flex-flow: column nowrap;
+    padding: 1em ;
   }
-  .delete-b{
-    background-color: transparent;
-    border: none;
+
+  .board-redirect{
+    text-decoration: none;
   }
 
   .board-card:hover{
     background-color: #b68ac4;
-    font-size: 2em;
-    font-weight: bold;
-  }
-  .board-card-title{
-    font-size: 30px;
-    font-family: 'Oswald', sans-serif;
-    font-family: 'Yanone Kaffeesatz', sans-serif;
   }
 
-  @media screen and (min-width: 600px) {
+  .board-card-title{
+    font-size: 1.8em;
+    font-family: 'Oswald', sans-serif;
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+    color: white;
+    margin: .5em;
+
+  }
+
+  .deleteBoard{
+    background-color: transparent;
+    border: none;
+    font-size: 15px;
+    align-self: flex-end;
+  }
+
+  .deleteBoard:hover{
+    color: white;
+    transition: all .25s ease;
+    cursor: pointer;
+  }
+
+  /* @media screen and (min-width: 600px) {
     .board-card{
       width: 80%;
     }
@@ -61,6 +102,6 @@ export default {
     .board-card{
       width: 90%;
     }
-  }
+  } */
 
 </style>

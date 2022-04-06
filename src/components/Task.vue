@@ -1,16 +1,14 @@
 <template>
   <div class="task ejemplo" >
     <p @click="changeState()" v-bind:class="isActive" >{{ name }} </p>
-    <!-- <p class="time">{{this.actualDate}}</p> -->
     <section class="buttons">
     <button class="delete" @click="deleteTask()"><i class="fa-solid fa-trash-can"></i></button>
-    <!-- <button class="showMore" @click="boton()"> <i class="fa-solid fa-circle-info"></i> </button> -->
     <i class="fa-solid fa-circle-info info">
-          <p class="time">Fecha creación: <span>{{this.actualDate}}</span></p>
+      <div>
+          <p class="created_at">Fecha creación: <span>{{this.actualDate}}</span></p>
+          <p class="ended_at">Fecha finalizacion: <span>{{this.endDate}}</span></p>
+      </div>
     </i>
-    <!-- <ul v-show="mostrar">
-            <li class="time">Fecha creación: {{this.actualDate}}</li>
-    </ul> -->
     </section>
   </div>
 </template>
@@ -47,8 +45,11 @@ export default {
   },
   methods: {
     changeState () {
+      const moment = require('moment')
+      const datenow = moment(new Date()).local().format('DD/MM/YYYY h:mm a')
       this.completed = !this.completed
       this.user.tableros[this.idTablero].lists[this.idLista].tasks[this.idTask]['completed'] = this.completed// !completed
+      this.user.tableros[this.idTablero].lists[this.idLista].tasks[this.idTask]['endDate'] = datenow
       localStorage.setItem('user', JSON.stringify(this.user))
       console.log(this.show)
       this.$router.go(0)
@@ -78,9 +79,13 @@ export default {
     padding: .5em !important;
   }
 
-.task:hover{
-  font-weight: bolder;
-}
+  .task:hover{
+    font-weight: bolder;
+  }
+
+  .task p:hover{
+    cursor: pointer;
+  }
 
   .delete{
     width: 30px;
@@ -91,7 +96,7 @@ export default {
   }
 
   .delete:hover{
-    font-size: 1.8em;
+    transform: scale(1.1);
     transition: all .25s ease;cursor: pointer;
   }
 
@@ -102,12 +107,6 @@ export default {
 
   .fa-solid:hover{
     color: #f04262;
-  }
-
-  .time{
-    font-size: 11px;
-    list-style: none;
-    padding:  0 !important;
   }
 
   .showMore{
@@ -123,31 +122,38 @@ export default {
     margin: 0 0 0 .2em;
   }
 
-  .info:hover p {
+  .info:hover div {
     display: flex;
   }
 
   .info:hover{
-    font-size: 27px;
+    transform: scale(1.1);
     color: #3d8fa1;
-    transition: all .25s ease;
+    transition: all .2s ease ;
     cursor: pointer;
   }
 
-  .info p{
-    position: absolute;
-    width: 150px;
-    background-color: #f3d8fc;
-    padding: 1em 1.2em !important;
-    border-radius: .2em;
+  .info div{
     display: flex;
+    position: absolute;
     flex-flow: column nowrap;
+    top: 10px;
+    right: 35px;
     display: none;
-    font-family: 'Courier New', Courier, monospace;
+    background-color: #f3d8fc;
+    box-shadow: 6px 8px 13px 1px rgba(0,0,0,0.36);
+    border-radius: .2em;
+    padding: .2em;
+    width: 215px;
+  }
+
+  .info p{
+    font-family: 'Oswald', sans-serif;
+    font-family: 'Yanone Kaffeesatz', sans-serif;
     color: black;
-    top: 14px;
-    left: 30px;
-    font-size: 10px;
+    font-size: 14px;
+    letter-spacing: .05em;
+    margin:.2em ;
   }
 
   .info p span{
@@ -161,5 +167,14 @@ export default {
   ul{
     padding: 0;
   }
+
+  @media screen and (min-width: 500px) {
+      .info div {
+        right: 0;
+        left: 35px;
+        overflow: hidden;
+      }
+
+    }
 
 </style>

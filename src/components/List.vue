@@ -3,7 +3,7 @@
     <div class="close">
       <button class="deleteList" @click="deleteList()"> X </button>
     </div>
-        <p>{{name}}</p>
+    <p>{{name}}</p>
     <div>
       <input type="text"
           placeholder="Añadir una tarea a la lista"
@@ -26,7 +26,6 @@ export default{
   props: {
     name: String,
     id: Number,
-    show: Boolean,
     actualDate: Date
   },
   data () {
@@ -37,13 +36,15 @@ export default{
     const tasks = (user.tableros[idTablero].lists[idList].tasks).filter(function (task) {
       return task.show
     })
+
     return {
       taskName: '',
       tasks: tasks,
       user,
       idTablero,
       idList,
-      moment
+      moment,
+      show: true
     }
   },
   methods: {
@@ -68,6 +69,10 @@ export default{
     },
     deleteList () {
       this.show = false
+      this.user.tableros[this.idTablero].lists[this.id]['show'] = this.show
+      localStorage.setItem('user', JSON.stringify(this.user))
+      this.$router.go(0)
+      // console.log(this.user.tableros[this.idTablero].lists[this.id]['show'])
     }
   }
 }
@@ -93,7 +98,7 @@ export default{
 
     p{
       font-size: 1.6em;
-      margin: .5em;
+      margin: 0 0 .5em 0;
     }
 
     input::placeholder{
@@ -109,6 +114,7 @@ export default{
   .deleteList{
     background-color: transparent;
     border: none;
+    font-size: 15px;
   }
 
   .deleteList:hover{

@@ -5,7 +5,7 @@
       <div v-if='mostrar'>
         <modal></modal>
       </div>
-      <div v-else>
+      <div class="content-container" v-else>
         <router-view class="container"></router-view>
       </div>
     </main>
@@ -59,5 +59,9 @@ export default {
 
 main{
   flex: 3 1 80vh;
+  }
+
+.content-container{
+  height: 100%;
 }
 </style>
