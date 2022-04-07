@@ -1,7 +1,7 @@
 <template>
  <div class="container">
     <section>
-      <div class="iframe-content">
+      <div class="info-content">
     <h3>Tableros de {{userName}}</h3>
      <iframe src="https://www.zeitverschiebung.net/clock-widget-iframe-v2?language=es&size=small&timezone=Atlantic%2FCanary"  frameborder="0" seamless></iframe>     </div>
       <input type="text" placeholder="Añade un nuevo panel" v-model="boardName" @keyup.enter="add()">
@@ -68,37 +68,21 @@ export default{
   justify-content: center;
   flex-flow: column nowrap;
 }
-.iframe-content{
+
+.info-content{
   display: flex;
-   width: 100%;
-  justify-content: space-between;
+  flex-flow: row wrap;
+  width: 100%;
+  justify-content: space-around;
 }
 
 iframe{
-  width: 15%;
+  flex:1 1 300px;
+  max-width: 300px;
 }
+
 .container section input{
-  align-self:  center;
-}
-  h3{
-    text-align: left;
-    margin: 1.5rem;
-    font-size: 1.8em;
-
-  }
-  .boards-collection{
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: flex-start;
-    align-content: center;
-    padding-top: 1rem;
-    margin: 1em;
-    border-radius: .2em;
-    flex: 4;
-    /* box-shadow: 5px 5px 24px 5px rgba(0,0,0,0.20); */
-  }
-
-  input{
+    align-self:  center;
     box-sizing: border-box;
     background-color: #b68ac4;
     border: 2px solid #b68ac4;
@@ -109,9 +93,24 @@ iframe{
     transition: all 600ms ease;
     text-align: center;
 
+}
+  h3{
+    text-align: left;
+    margin: 1.5rem;
+    font-size: 1.8em;
+    flex: 1 1 300px;
+
+  }
+  .boards-collection{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    justify-items: center;
+    margin: 2em;
+    flex: 4;
   }
 
-  input:focus, input:active{
+  .container section input:focus, .container section input:active{
     background-color: white;
     color: #546E7A;
   }
@@ -119,4 +118,5 @@ iframe{
   input::placeholder{
     color: white;
   }
+
 </style>

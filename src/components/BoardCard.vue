@@ -55,12 +55,14 @@ export default {
     height: 90px; */
     background-color: rgb(40, 214, 182);
     transition: all .5s ease;
-    margin: 1em 0 0 2.6em;
+    margin: 1em;
     border-radius: 5px;
     width:20%;
     display: flex;
     flex-flow: column nowrap;
     padding: 1em ;
+     box-shadow: 5px 5px 24px 5px rgba(0,0,0,0.20);
+
   }
 
   .board-redirect{
@@ -93,11 +95,12 @@ export default {
     cursor: pointer;
   }
 
-  /* @media screen and (min-width: 600px) {
+  @media screen and (min-width: 600px) {
     .board-card{
-      width: 80%;
+       margin: 1em .5 0 2.6em;
     }
   }
+  /*
   @media screen and (min-width: 1024px) {
     .board-card{
       width: 90%;
